@@ -1,31 +1,24 @@
-//
-// Created by jgros on 11/1/2022.
-//
+/*
+ * Code directly adapted from implementation seen in "Ray Tracing in One Weekend" by Peter Shirley
+ */
 
 #ifndef GL_RAYTRACER_RAY_H
 #define GL_RAYTRACER_RAY_H
 
 #include <cmath>
+#include "vec3.h"
 
 class Ray {
 private:
-    float* direction;
-    int* origin_point;
-
+    point3 orig;
+    vec3 dir;
 public:
-    Ray(int origin[3], const float* point1, const float* point2);
+    Ray(const point3& origin, const vec3& direction);
 
-    static float* calcDirectionUnitVector(float* dirVec, const float point1[3], const float point2[3]) {
-        dirVec[0] = point2[0] - point1[0];
-        dirVec[1] = point2[1] - point1[1];
-        dirVec[2] = point2[2] - point1[2];
-        float mag = std::sqrt(dirVec[0]*dirVec[0] + dirVec[1]*dirVec[1] + dirVec[2]*dirVec[2]);
-        for (int i = 0; i < 3; i++) {
-            dirVec[i] = dirVec[i]/mag;
-        }
-        return dirVec;
-    }
+    point3 origin() const;
+    vec3 direction() const;
+
+    point3 at(double t) const;
 };
-
 
 #endif //GL_RAYTRACER_RAY_H
