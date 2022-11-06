@@ -7,19 +7,19 @@
 
 #include <GL/freeglut.h>
 #include <vector>
+#include "../geometry/vec3.h"
 
 class PPM {
 private:
-    std::vector<GLubyte[4]> *pixels;
+    std::vector<std::vector<color>> *pixels;
 
 public:
-    explicit PPM(std::vector<GLubyte[4]> *pixels);
+    explicit PPM(std::vector<std::vector<color>> *pixels);
 
-    std::vector<GLubyte[4]>* getPixels();
+    std::vector<std::vector<color>>* getPixels();
 
-//    NYI
-//    static PPM saveppm(char* filepath);
-//    static PPM loadppm(char* filepath);
+    static void saveppm(char* filepath, PPM ppm_image);
+    static PPM loadppm(char* filepath);
 };
 
 #endif //GL_RAYTRACER_PPM_H
