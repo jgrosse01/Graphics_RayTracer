@@ -1,13 +1,35 @@
 #include <GL/freeglut.h>
 #include <vector>
+#include <cmath>
+#include <limits>
+#include <memory>
 #include <iostream>
 
 #include "src/geometry/Triangle.h"
+#include "src/geometry/Sphere.h"
 #include "src/geometry/Ray.h"
+#include "src/geometry/vec3.h"
+#include "src/geometry/hittable_list.h"
 #include "src/ppm/ppm.h"
 
 
+// some utility
+
 using namespace std;
+using std::shared_ptr;
+using std::make_shared;
+using std::sqrt;
+
+const double infinity = std::numeric_limits<double>::infinity();
+const double pi = 3.1415926535897932385;
+
+inline double degrees_to_radians(double degrees) {
+    return degrees * pi / 180.0;
+}
+
+/*
+ * Begin Main
+ */
 
 bool testing = true;
 
@@ -27,18 +49,17 @@ GLfloat light0_pos[3] = {-10,1,0};
 
 GLfloat cameraLocation[3] = {0,1,-10};
 
-vector<GLubyte[4]> *pixels;
+vector<vector<color>> *pixels;
 
 PPM* savedPPM;
 
 Triangle* t1 = new Triangle();
 
+
 void display() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-
-    t1->draw();
 
     glFlush();
     glutSwapBuffers();
@@ -50,7 +71,7 @@ void reshape(int x, int y) {
     glViewport(0, 0, (GLsizei) width, (GLsizei) height);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(90, width/(height*1.0), 0, 150);
+    gluPerspective(90, width/(height*1.0), 0, 10);
     glOrtho(-2, 2, -2, 2, 1, 100);
     gluLookAt(cameraLocation[0], cameraLocation[1], cameraLocation[2],
               0, 0, 0, 0, 1, 0);
@@ -59,29 +80,16 @@ void reshape(int x, int y) {
 
 void idle() {}
 
-void keys(unsigned char key, int x, int y) {
-    switch (key) {
-        default:
-            break;
-        case 'S':
-            // free up memory before reassigning to avoid memory leaks
-            delete(savedPPM);
-            glReadPixels(0,0,width,height,GL_RGBA,GL_FLOAT, &pixels);
-            savedPPM = new PPM(pixels);
-        case 'p':
-            displayPPM = !displayPPM;
-            glutPostRedisplay();
-    }
-}
-
 void init() {
-    glEnable(GL_DEPTH_TEST | GL_NORMALIZE);
+    glEnable(GL_DEPTH_TEST | GL_DEPTH | GL_CULL_FACE | GL_NORMALIZE);
+    glDepthFunc(GL_LEQUAL);
+    glDepthMask(GL_TRUE);
     glViewport(0,0, width, height);
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
 
-    gluPerspective(90, width/(height*1.0), 0, 150);
+    gluPerspective(90, width/(height*1.0), 0, 10);
     glOrtho(-2, 2, -2, 2, 1, 100);
     gluLookAt(cameraLocation[0], cameraLocation[1], cameraLocation[2],
               0, 0, 0, 0, 1, 0);
@@ -95,29 +103,23 @@ void init() {
     glLightfv(GL_LIGHT0, GL_POSITION, light0_pos);
 }
 
+void renderScene() {
+    hittable_list world;
+    world.add( make_shared<Sphere>( point3(-1,1,-10), 1, color(0.5,1,0.5) ) );
+}
+
 int main(int argc, char** argv) {
-    // Testing Code
-    if (testing) {
-        float dirVec[3] = {0,0,0};
-        float point1[3] = {0,0,0};
-        float point2[3] = {2,2,2};
-        float* dirVec1 = Ray::calcDirectionUnitVector(dirVec, point1, point2);
-        float* dirVec2 = Ray::calcDirectionUnitVector(dirVec, point2, point1);
-
-        cout << dirVec1[0] << " " << dirVec1[1] << " " << dirVec1[2] << endl;
-        cout << dirVec2[0] << " " << dirVec2[1] << " " << dirVec2[2] << endl;
-    }
-
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
     glutInitWindowSize(width, height);
     glutInitWindowPosition(100, 100);
     glutCreateWindow("Rudimentary CPU RayTracer");
 
+    renderScene();
+
     glutDisplayFunc(display);
     glutReshapeFunc(reshape);
     glutIdleFunc(idle);
-    glutKeyboardFunc(keys);
 
     init();
 
