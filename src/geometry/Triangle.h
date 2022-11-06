@@ -5,12 +5,14 @@
 #ifndef GL_RAYTRACER_TRIANGLE_H
 #define GL_RAYTRACER_TRIANGLE_H
 
-float defaultPoint1[] = {0,1,0};
-float defaultPoint2[] = {0.5,0,0};
-float defaultPoint3[] = {-0.5, 0, 0};
-float defaultLocation[] = {0,0,0};
-float defaultRotation[] = {0,0,0};
-int defaultColor[] = {255,0,50,255};
+#include <GL/freeglut.h>
+
+static float defaultPoint1[] = {0,1,0};
+static float defaultPoint2[] = {0.5,0,0};
+static float defaultPoint3[] = {-0.5, 0, 0};
+static float defaultLocation[] = {0,0,0};
+static float defaultRotation[] = {0,0,0};
+static int defaultColor[] = {255,0,50,255};
 
 class Triangle {
 private:

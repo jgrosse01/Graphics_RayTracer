@@ -5,12 +5,15 @@
 #ifndef GL_RAYTRACER_PPM_H
 #define GL_RAYTRACER_PPM_H
 
+#include <GL/freeglut.h>
+#include <vector>
+
 class PPM {
 private:
     std::vector<GLubyte[4]> *pixels;
 
 public:
-    PPM(std::vector<GLubyte[4]> *pixels);
+    explicit PPM(std::vector<GLubyte[4]> *pixels);
 
     std::vector<GLubyte[4]>* getPixels();
 

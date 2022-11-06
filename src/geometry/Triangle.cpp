@@ -4,6 +4,7 @@
 
 #include "Triangle.h"
 
+
 Triangle::Triangle(float *point1, float *point2, float *point3, float *location, float *rotation, int *color) {
     this->point1 = point1;
     this->point2 = point2;

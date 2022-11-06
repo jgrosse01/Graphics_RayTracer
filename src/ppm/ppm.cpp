@@ -3,8 +3,6 @@
 //
 
 #include "ppm.h"
-
-#include <utility>
 #include <vector>
 
 PPM::PPM(std::vector<GLubyte[4]> *pixels) {

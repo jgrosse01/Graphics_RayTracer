@@ -1,9 +1,11 @@
 #include <GL/freeglut.h>
 #include <vector>
 #include <iostream>
-#include "src/ppm/ppm.cpp"
-#include "src/geometry/Ray.cpp"
-#include "src/geometry/Triangle.cpp"
+
+#include "src/geometry/Triangle.h"
+#include "src/geometry/Ray.h"
+#include "src/ppm/ppm.h"
+
 
 using namespace std;
 
