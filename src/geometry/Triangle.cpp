@@ -40,3 +40,9 @@ void Triangle::updateLocation(float x, float y, float z) {
     this->location[1] = y;
     this->location[2] = z;
 }
+
+void Triangle::updateRotation(float xAngle, float yAngle, float zAngle) {
+    this->rotation[0] = xAngle;
+    this->rotation[1] = yAngle;
+    this->rotation[2] = zAngle;
+}

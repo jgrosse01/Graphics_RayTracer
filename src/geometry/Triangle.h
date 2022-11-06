@@ -32,6 +32,7 @@ public:
                       int color[4] = defaultColor);
     void draw();
     void updateLocation(float x, float y, float z);
+    void updateRotation(float xAngle, float yAngle, float zAngle);
 };
 
 
