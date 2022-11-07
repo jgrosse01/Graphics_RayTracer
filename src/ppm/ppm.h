@@ -18,7 +18,7 @@ public:
 
     std::vector<std::vector<color>>* getPixels();
 
-    static void saveppm(char* filepath, PPM ppm_image);
+    static void saveppm(PPM ppm_image);
     static PPM loadppm(char* filepath);
 };
 

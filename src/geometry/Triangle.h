@@ -33,6 +33,8 @@ public:
     void draw();
     void updateLocation(float x, float y, float z);
     void updateRotation(float xAngle, float yAngle, float zAngle);
+
+    ~Triangle();
 };
 
 

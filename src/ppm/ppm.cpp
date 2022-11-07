@@ -15,7 +15,7 @@ std::vector<std::vector<color>>* PPM::getPixels() {
     return new_;
 }
 
-void PPM::saveppm(char *filepath, PPM ppm_image) {
+void PPM::saveppm(PPM ppm_image) {
     // create new file
     std::ofstream img("saved_files/raytrace.ppm");
     // write header line

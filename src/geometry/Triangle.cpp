@@ -46,3 +46,12 @@ void Triangle::updateRotation(float xAngle, float yAngle, float zAngle) {
     this->rotation[1] = yAngle;
     this->rotation[2] = zAngle;
 }
+
+Triangle::~Triangle() {
+    delete[] point1;
+    delete[] point2;
+    delete[] point3;
+    delete[] rotation;
+    delete[] location;
+    delete[] color;
+}
