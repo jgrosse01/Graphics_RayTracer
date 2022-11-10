@@ -4,19 +4,19 @@
 
 #include "Ray.h"
 
-Ray::Ray(const point3 &origin, const vec3 &direction) {
-    this->orig = origin;
-    this->dir = direction;
+Ray::Ray(const Point3 &origin, const Vec3 &direction) {
+    this->origin_ = origin;
+    this->direction_ = direction;
 }
 
-point3 Ray::origin() const {
-    return this->orig;
+Point3 Ray::origin() const{
+    return this->origin_;
 }
 
-vec3 Ray::direction() const {
-    return this->dir;
+Vec3 Ray::direction() const{
+    return this->direction_;
 }
 
-point3 Ray::at(double t) const {
-    return orig + t*dir;
+Point3 Ray::at(double t) const{
+    return origin_ + (t * direction_);
 }

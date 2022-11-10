@@ -6,19 +6,19 @@
 #define GL_RAYTRACER_RAY_H
 
 #include <cmath>
-#include "vec3.h"
+#include "Vec3.h"
 
 class Ray {
 private:
-    point3 orig;
-    vec3 dir;
+    Point3 origin_;
+    Vec3 direction_;
 public:
-    Ray(const point3& origin, const vec3& direction);
+    Ray(const Point3& origin, const Vec3& direction);
 
-    point3 origin() const;
-    vec3 direction() const;
+    Point3 origin() const;
+    Vec3 direction() const;
 
-    point3 at(double t) const;
+    Point3 at(double t) const;
 };
 
 #endif //GL_RAYTRACER_RAY_H
