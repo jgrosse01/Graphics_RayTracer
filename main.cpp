@@ -4,10 +4,10 @@
 #include <memory>
 
 #include "src/geometry/Sphere.h"
-#include "src/geometry/Ray.h"
-#include "src/geometry/vec3.h"
-#include "src/geometry/hittable.h"
-#include "src/geometry/hittable_list.h"
+#include "src/rt_lib/Ray.h"
+#include "src/rt_lib/vec3.h"
+#include "src/rt_lib/hittable.h"
+#include "src/rt_lib/hittable_list.h"
 #include "src/ppm/ppm.h"
 
 
