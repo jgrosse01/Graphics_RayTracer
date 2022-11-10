@@ -10,17 +10,6 @@ Sphere::Sphere(point3 center, double radius) {
     this->radius = radius;
 }
 
-void Sphere::draw() {
-    // draw triangle without affecting the overall ModelView Matrix
-    glPushMatrix();
-    glPushAttrib(GL_COLOR);
-    glColor3d(this->color[0], this->color[1], this->color[2]);
-    glTranslated(this->center[0], this->center[1], this->center[2]);
-    gluSphere(gluNewQuadric(), this->radius, 50, 50);
-    glPopAttrib();
-    glPopMatrix();
-}
-
 bool Sphere::hit(const Ray& r, double t_min, double t_max, hit_record& rec) const {
     vec3 oc = r.origin() - center;
     auto a = r.direction().length_squared();

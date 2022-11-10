@@ -15,8 +15,6 @@ public:
 
     Sphere(point3 center, double radius);
 
-    void draw();
-
     bool hit(const Ray& r, double t_min, double t_max, hit_record& rec) const override;
 };
 
