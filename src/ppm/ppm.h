@@ -9,17 +9,30 @@
 #include <vector>
 #include "../geometry/vec3.h"
 
+using std::string;
+
 class PPM {
 private:
-    std::vector<std::vector<color>> *pixels;
+    color* pixels;
+    int width;
+    int height;
+
+    void writeColor(std::ostream &output, color c);
 
 public:
-    explicit PPM(std::vector<std::vector<color>> *pixels);
+    PPM(color* pixels, int w);
+    PPM(int w, int h);
 
-    std::vector<std::vector<color>>* getPixels();
+    int getWidth();
+    int getHeight();
 
-    static void saveppm(PPM ppm_image);
-    static PPM loadppm(char* filepath);
+    color& at(int r, int c);
+
+    color* getPixels();
+
+    void savePPM(const string& filename);
+
+    ~PPM();
 };
 
 #endif //GL_RAYTRACER_PPM_H

@@ -6,34 +6,49 @@
 #include <vector>
 #include <fstream>
 
-PPM::PPM(std::vector<std::vector<color>> *pixels) {
-    this->pixels = pixels;
+PPM::PPM(color* pixels, int w) {
+
 }
 
-std::vector<std::vector<color>>* PPM::getPixels() {
-    std::vector<std::vector<color>>* new_ = this->pixels;
-    return new_;
+PPM::PPM(int w, int h) {
+    this->width = w;
+    this->height = h;
+    pixels = new color[width*height];
 }
 
-void PPM::saveppm(PPM ppm_image) {
-    // create new file
-    std::ofstream img("saved_files/raytrace.ppm");
-    // write header line
-    int width = ppm_image.pixels->size();
-    int height = ppm_image.pixels[0].size();
-    img << "P3 " << width << " " << height << " " << 255 << std::endl;
-    // iterative loops to save RGB color info to ppm
-    for (int i = 0; i < width; i++) {
-        for (int j = 0; j < height; j++) {
-            img << ppm_image.pixels[i][j][0] << " " << ppm_image.pixels[i][j][1] << " " << ppm_image.pixels[i][j][2] << std::endl;
+int PPM::getWidth() {
+    return this->width;
+}
+
+int PPM::getHeight() {
+    return this->height;
+}
+
+color& PPM::at(int r, int c) {
+    return pixels[r*width + c];
+}
+
+color* PPM::getPixels() {
+
+}
+
+void PPM::savePPM(const string& name) {
+    std::ofstream img("./images/" + name + ".ppm");
+    img << "P3 " << this->width << " " << this->height << " 255\n";
+    for (int j = this->height-1; j >= 0; j--) {
+        for (int i = 0; i < width; i++) {
+            writeColor(img, this->at(j,i));
         }
     }
     img.close();
 }
 
-PPM PPM::loadppm(char *filepath) {
-    return PPM(nullptr);
+void PPM::writeColor(std::ostream &output, color c) {
+    output << static_cast<int>(255.999 * c[0]) << ' '
+        << static_cast<int>(255.999 * c[1]) << ' '
+        << static_cast<int>(255.999 * c[2]) << '\n';
 }
 
-
-
+PPM::~PPM() {
+    delete[] pixels;
+}
