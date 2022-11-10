@@ -13,7 +13,7 @@ public:
     double radius;
     color color;
 
-    Sphere(point3 center, double radius, ::color color);
+    Sphere(point3 center, double radius);
 
     void draw();
 

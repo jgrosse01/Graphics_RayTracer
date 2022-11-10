@@ -5,10 +5,9 @@
 
 #include "Sphere.h"
 
-Sphere::Sphere(point3 center, double radius, ::color color) {
+Sphere::Sphere(point3 center, double radius) {
     this->center = center;
     this->radius = radius;
-    this->color = color;
 }
 
 void Sphere::draw() {
