@@ -5,7 +5,7 @@
 #ifndef GL_RAYTRACER_SPHERE_H
 #define GL_RAYTRACER_SPHERE_H
 
-#include "hittable.h"
+#include "../rt_lib/hittable.h"
 
 class Sphere : public hittable {
 public:

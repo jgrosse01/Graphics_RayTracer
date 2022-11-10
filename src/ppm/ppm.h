@@ -7,7 +7,7 @@
 
 #include <GL/freeglut.h>
 #include <vector>
-#include "../geometry/vec3.h"
+#include "../rt_lib/vec3.h"
 
 using std::string;
 
