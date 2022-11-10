@@ -1,5 +1,6 @@
 /*
- * Code directly adapted from implementation seen in "Ray Tracing in One Weekend" by Peter Shirley
+ * Vec3 is a simple implementation of a three-dimensional vector.
+ * Author: Jacob Grosse (10 November, 2022)
  */
 
 #ifndef GL_RAYTRACER_VEC3_H
@@ -10,104 +11,84 @@
 
 using std::sqrt;
 
-class vec3 {
+class Vec3 {
+protected:
+    double coordinates_[3]{};
+
 public:
-    double e[3];
+    Vec3();
+    Vec3(double x, double y, double z);
 
-    vec3() : e{0,0,0} {}
-    vec3(double e0, double e1, double e2) : e{e0, e1, e2} {}
+    double x();
+    double y();
+    double z();
 
-    double x() const { return e[0]; }
-    double y() const { return e[1]; }
-    double z() const { return e[2]; }
-
-    vec3 operator-() const { return vec3(-e[0], -e[1], -e[2]); }
-    double operator[](int i) const { return e[i]; }
-    double& operator[](int i) { return e[i]; }
-
-    vec3& operator+=(const vec3 &v) {
-        e[0] += v.e[0];
-        e[1] += v.e[1];
-        e[2] += v.e[2];
-        return *this;
-    }
-
-    vec3& operator*=(const double t) {
-        e[0] *= t;
-        e[1] *= t;
-        e[2] *= t;
-        return *this;
-    }
-
-    vec3& operator/=(const double t) {
-        return *this *= 1/t;
-    }
-
-    double length() const {
-        return sqrt(length_squared());
-    }
-
-    double length_squared() const {
-        return e[0]*e[0] + e[1]*e[1] + e[2]*e[2];
-    }
+    Vec3 operator-() const;
+    double operator[](int i) const;
+    Vec3& operator+=(const Vec3 &v);
+    Vec3& operator*=(double t);
+    Vec3& operator/=(double t);
+    double length();
+    double lengthSquared();
 };
 
-// Type aliases for vec3
-using point3 = vec3;   // 3D point
-using color = vec3;    // RGB color
+// Type aliases for Vec3 to make code more readable.
+using Point3 = Vec3;   // Used to represent a point in 3D space.
+using Color = Vec3;    // Used to represent RGB Color.
 
-// vec3 Utility Functions
+// Vec3 Utility Operators
 
-static std::ostream& operator<<(std::ostream &out, const vec3 &v) {
-    return out << v.e[0] << ' ' << v.e[1] << ' ' << v.e[2];
+// output operator
+inline std::ostream& operator<<(std::ostream &out, const Vec3 v) {
+    return out << v[0] << ' ' << v[1] << ' ' << v[2];
 }
 
-static vec3 operator+(const vec3 &u, const vec3 &v) {
-    return {u.e[0] + v.e[0], u.e[1] + v.e[1], u.e[2] + v.e[2]};
+// two vector addition
+inline Vec3 operator+(const Vec3 &u, const Vec3 &v) {
+    return {u[0] + v[0], u[1] + v[1], u[2] + v[2]};
 }
 
-static vec3 operator-(const vec3 &u, const vec3 &v) {
-    return {u.e[0] - v.e[0], u.e[1] - v.e[1], u.e[2] - v.e[2]};
+// two vector subtraction
+inline Vec3 operator-(const Vec3 &u, const Vec3 &v) {
+    return {u[0] - v[0], u[1] - v[1], u[2] - v[2]};
 }
 
-static vec3 operator*(const vec3 &u, const vec3 &v) {
-    return {u.e[0] * v.e[0], u.e[1] * v.e[1], u.e[2] * v.e[2]};
+// two vector straight multiplication (not cross or dot multiplicaiton)
+inline Vec3 operator*(const Vec3 &u, const Vec3 &v) {
+    return {u[0] * v[0], u[1] * v[1], u[2] * v[2]};
 }
 
-static vec3 operator*(double t, const vec3 &v) {
-    return {t*v.e[0], t*v.e[1], t*v.e[2]};
+// constant-vector multiplication
+inline Vec3 operator*(double t, const Vec3 &v) {
+    return {t*v[0], t * v[1], t * v[2]};
 }
 
-static vec3 operator*(const vec3 &v, double t) {
+// vector-constant multiplication
+inline Vec3 operator*(const Vec3 &v, double t) {
     return t * v;
 }
 
-static vec3 operator/(vec3 v, double t) {
+// vector-constant division
+inline Vec3 operator/(Vec3 v, double t) {
     return (1/t) * v;
 }
 
-static double dot(const vec3 &u, const vec3 &v) {
-    return u.e[0] * v.e[0]
-           + u.e[1] * v.e[1]
-           + u.e[2] * v.e[2];
+// two vector dot product
+inline double dot(const Vec3 &u, const  Vec3 &v) {
+    return u[0] * v[0]
+           + u[1] * v[1]
+           + u[2] * v[2];
 }
 
-static vec3 cross(const vec3 &u, const vec3 &v) {
-    return {u.e[1] * v.e[2] - u.e[2] * v.e[1],
-            u.e[2] * v.e[0] - u.e[0] * v.e[2],
-            u.e[0] * v.e[1] - u.e[1] * v.e[0]};
+// two vector cross product
+inline Vec3 cross(Vec3 &u, Vec3 &v) {
+    return {u[1] * v[2] - u[2] * v[1],
+            u[2] * v[0] - u[0] * v[2],
+            u[0] * v[1] - u[1] * v[0]};
 }
 
-static vec3 unit_vector(vec3 v) {
+inline Vec3 unit_vector(Vec3 v) {
     return v / v.length();
-}
-
-// color utility
-static void write_color(std::ostream &out, color pixel_color) {
-    // Write the translated [0,255] value of each color component.
-    out << static_cast<int>(255.999 * pixel_color.x()) << ' '
-        << static_cast<int>(255.999 * pixel_color.y()) << ' '
-        << static_cast<int>(255.999 * pixel_color.z()) << '\n';
 }
 
 #endif //GL_RAYTRACER_VEC3_H
