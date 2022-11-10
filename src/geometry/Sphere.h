@@ -9,11 +9,11 @@
 
 class Sphere : public hittable {
 public:
-    point3 center;
+    Point3 center;
     double radius;
-    color color;
+    Color color;
 
-    Sphere(point3 center, double radius);
+    Sphere(Point3 center, double radius);
 
     bool hit(const Ray& r, double t_min, double t_max, hit_record& rec) const override;
 };
