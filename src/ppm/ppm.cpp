@@ -1,54 +1,45 @@
-//
-// Created by jgros on 11/1/2022.
-//
+/*
+ * PPM class to store and manage screen size pixel color values.
+ * Author: Jacob Grosse (1 November 2022)
+ */
 
-#include "ppm.h"
-#include <vector>
-#include <fstream>
-
-PPM::PPM(color* pixels, int w) {
-
-}
+#include "PPM.h"
 
 PPM::PPM(int w, int h) {
-    this->width = w;
-    this->height = h;
-    pixels = new color[width*height];
+    this->width_ = w;
+    this->height_ = h;
+    pixels_ = new Color[width_ * height_];
 }
 
-int PPM::getWidth() {
-    return this->width;
+int PPM::width() {
+    return this->width_;
 }
 
-int PPM::getHeight() {
-    return this->height;
+int PPM::height() {
+    return this->height_;
 }
 
-color& PPM::at(int r, int c) {
-    return pixels[r*width + c];
-}
-
-color* PPM::getPixels() {
-
+Color& PPM::at(int r, int c) {
+    return pixels_[r * width_ + c];
 }
 
 void PPM::savePPM(const string& name) {
     std::ofstream img("./images/" + name + ".ppm");
-    img << "P3 " << this->width << " " << this->height << " 255\n";
-    for (int j = this->height-1; j >= 0; j--) {
-        for (int i = 0; i < width; i++) {
+    img << "P3 " << this->width_ << " " << this->height_ << " 255\n";
+    for (int j = this->height_ - 1; j >= 0; j--) {
+        for (int i = 0; i < width_; i++) {
             writeColor(img, this->at(j,i));
         }
     }
     img.close();
 }
 
-void PPM::writeColor(std::ostream &output, color c) {
+void PPM::writeColor(std::ostream &output, Color c) {
     output << static_cast<int>(255.999 * c[0]) << ' '
         << static_cast<int>(255.999 * c[1]) << ' '
         << static_cast<int>(255.999 * c[2]) << '\n';
 }
 
 PPM::~PPM() {
-    delete[] pixels;
+    delete[] pixels_;
 }

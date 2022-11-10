@@ -1,34 +1,33 @@
-//
-// Created by jgros on 11/1/2022.
-//
+/*
+ * PPM class to store and manage screen size pixel color values.
+ * Author: Jacob Grosse (1 November 2022)
+ */
 
 #ifndef GL_RAYTRACER_PPM_H
 #define GL_RAYTRACER_PPM_H
 
 #include <GL/freeglut.h>
 #include <vector>
-#include "../rt_lib/vec3.h"
+#include "../rt_lib/Vec3.h"
+#include <fstream>
 
 using std::string;
 
 class PPM {
 private:
-    color* pixels;
-    int width;
-    int height;
+    Color* pixels_;
+    int width_;
+    int height_;
 
-    void writeColor(std::ostream &output, color c);
+    static void writeColor(std::ostream &output, Color c);
 
 public:
-    PPM(color* pixels, int w);
     PPM(int w, int h);
 
-    int getWidth();
-    int getHeight();
+    int width();
+    int height();
 
-    color& at(int r, int c);
-
-    color* getPixels();
+    Color& at(int r, int c);
 
     void savePPM(const string& filename);
 
