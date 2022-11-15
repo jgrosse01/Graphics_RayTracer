@@ -25,8 +25,6 @@ PPM* renderScene(int width, int height);
 
 Color rayColor(const Ray& r, const hittable& world);
 
-double limitToRange(double x, double minVal, double maxVal);
-
 double degreesToRadians(double degrees);
 
 #endif //GL_RAYTRACER_RTUTILITIES_H

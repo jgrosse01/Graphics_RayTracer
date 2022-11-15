@@ -35,16 +35,6 @@ Color rayColor(const Ray& r, const hittable& world) {
     return (1.0-t) * Color(1.0, 1.0, 1.0) + t * Color(0.4, 0.7, 1.0);
 }
 
-double limitToRange(double x, double minValue, double maxValue) {
-    if (x < minValue) {
-        return minValue;
-    }
-    if (x > maxValue) {
-        return maxValue;
-    }
-    return x;
-}
-
 double degreesToRadians(double degrees) {
     return degrees * c_pi / 180.0;
 }

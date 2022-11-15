@@ -63,3 +63,16 @@ double Vec3::length() {
 double Vec3::lengthSquared() {
     return coordinates_[0] * coordinates_[0] + coordinates_[1] * coordinates_[1] + coordinates_[2] * coordinates_[2];
 }
+
+Vec3 Vec3::limitToRange(double minVal, double maxVal) {
+    Vec3 vec = Vec3(this->coordinates_[0], this->coordinates_[1], this->coordinates_[2]);
+    for (double & coordinate : vec.coordinates_) {
+        if (coordinate < minVal) {
+            coordinate = minVal;
+        }
+        if (coordinate > maxVal) {
+            coordinate = maxVal;
+        }
+    }
+    return vec;
+}

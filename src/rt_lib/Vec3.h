@@ -30,6 +30,8 @@ public:
     Vec3& operator/=(double t);
     double length();
     double lengthSquared();
+
+    Vec3 limitToRange(double minVal, double maxVal);
 };
 
 // Type aliases for Vec3 to make code more readable.
