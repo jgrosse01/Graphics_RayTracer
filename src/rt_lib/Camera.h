@@ -12,10 +12,10 @@
 
 class Camera {
 private:
-    float aspect;
-    float vpHeight;
-    float vpWidth;
-    float focal;
+    double aspect;
+    double vpHeight;
+    double vpWidth;
+    double focal;
 
     Point3 origin;
     Vec3 horizontal;
@@ -23,7 +23,7 @@ private:
     Vec3 lowerLeftCorner;
 
 public:
-    explicit Camera(Vec3 origin = Vec3(0,0,0), float aspectRatio = 16.0/9.0, float focalLength = 1.0, float viewportHeight = 2.0);
+    explicit Camera(double aspectRatio = 16.0/9.0, Vec3 origin = Vec3(0,0,0), double focalLength = 1.0, double viewportHeight = 2.0);
 
     Ray getRay(double u, double v);
 };

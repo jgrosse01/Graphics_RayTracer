@@ -6,7 +6,7 @@
 #include "RTUtilities.h"
 
 void renderScene(int width, int height) {
-    Camera cam = Camera();
+    auto cam = Camera(width/(height*1.0));
 
     HittableList world;
     world.add(make_shared<Sphere>(Point3(0, 0, -1), 0.5) );
@@ -33,6 +33,16 @@ Color rayColor(const Ray& r, const hittable& world) {
     Vec3 unit_direction = unit_vector(r.direction());
     auto t = 0.5*(unit_direction.y() + 1.0);
     return (1.0-t) * Color(1.0, 1.0, 1.0) + t * Color(0.4, 0.7, 1.0);
+}
+
+double limitToRange(double x, double minValue, double maxValue) {
+    if (x < minValue) {
+        return minValue;
+    }
+    if (x > maxValue) {
+        return maxValue;
+    }
+    return x;
 }
 
 double degreesToRadians(double degrees) {

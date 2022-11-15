@@ -5,7 +5,7 @@
 
 #include "Camera.h"
 
-Camera::Camera(Vec3 origin, float aspectRatio, float focalLength,  float viewportHeight) {
+Camera::Camera(double aspectRatio, Vec3 origin, double focalLength,  double viewportHeight) {
     this->origin = origin;
     this->aspect = aspectRatio;
     this->focal = focalLength;
