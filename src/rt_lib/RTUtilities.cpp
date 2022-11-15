@@ -6,14 +6,7 @@
 #include "RTUtilities.h"
 
 void renderScene(int width, int height) {
-    auto aspect = 16.0/10.0;
-    auto viewport_height = 2.0;
-    auto viewport_width = aspect*viewport_height;
-    auto ray_origin = Point3(0, 0, 0);
-    auto horizontal = Vec3(viewport_width, 0, 0);
-    auto vertical = Vec3(0, viewport_height, 0);
-    int focal_length = 1.0;
-    auto lower_left = ray_origin - horizontal/2 - vertical/2 - Vec3(0, 0, focal_length);
+    Camera cam = Camera();
 
     HittableList world;
     world.add(make_shared<Sphere>(Point3(0, 0, -1), 0.5) );
@@ -25,7 +18,7 @@ void renderScene(int width, int height) {
         for (int i = 0; i < width; i++) {
             auto u = double(i) / (width-1);
             auto v = double(j) / (height-1);
-            Ray r(ray_origin, lower_left + u*horizontal + v*vertical - ray_origin);
+            Ray r = cam.getRay(u, v);
             ppm->at(j,i) = rayColor(r, world);
         }
     }

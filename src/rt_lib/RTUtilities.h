@@ -11,6 +11,7 @@
 #include "HittableList.h"
 #include "../geometry/Sphere.h"
 #include "../ppm/PPM.h"
+#include "Camera.h"
 
 using namespace std;
 using std::shared_ptr;
