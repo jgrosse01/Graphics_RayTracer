@@ -5,7 +5,7 @@
 
 #include "RTUtilities.h"
 
-void renderScene(int width, int height) {
+PPM* renderScene(int width, int height) {
     auto cam = Camera(width/(height*1.0));
 
     HittableList world;
@@ -22,7 +22,7 @@ void renderScene(int width, int height) {
             ppm->at(j,i) = rayColor(r, world);
         }
     }
-    ppm->savePPM("raytrace");
+    return ppm;
 }
 
 Color rayColor(const Ray& r, const hittable& world) {

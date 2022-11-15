@@ -21,7 +21,7 @@ using std::sqrt;
 const double c_infinity = std::numeric_limits<double>::infinity();
 const double c_pi = 3.1415926535897932385;
 
-void renderScene(int width, int height);
+PPM* renderScene(int width, int height);
 
 Color rayColor(const Ray& r, const hittable& world);
 
