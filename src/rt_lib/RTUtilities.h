@@ -19,6 +19,9 @@ using std::shared_ptr;
 using std::make_shared;
 using std::sqrt;
 
+static std::uniform_real_distribution<double> s_distribution(0.0, 1.0);
+static std::mt19937 s_generator;
+
 const double c_infinity = std::numeric_limits<double>::infinity();
 const double c_pi = 3.1415926535897932385;
 

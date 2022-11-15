@@ -41,8 +41,6 @@ Color rayColor(const Ray& r, const hittable& world) {
 }
 
 double randomDouble() {
-    static std::uniform_real_distribution<double> s_distribution(0.0, 1.0);
-    static std::mt19937 s_generator;
     return s_distribution(s_generator);
 }
 
