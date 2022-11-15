@@ -35,9 +35,10 @@ void PPM::savePPM(const string& name) {
 }
 
 void PPM::writeColor(std::ostream &output, Color c) {
-    output << static_cast<int>(255.999 * c[0]) << ' '
-        << static_cast<int>(255.999 * c[1]) << ' '
-        << static_cast<int>(255.999 * c[2]) << '\n';
+    c = c.limitToRange(0.0, 0.999);
+    output << static_cast<int>(256 * c[0]) << ' '
+        << static_cast<int>(256 * c[1]) << ' '
+        << static_cast<int>(256 * c[2]) << '\n';
 }
 
 PPM::~PPM() {

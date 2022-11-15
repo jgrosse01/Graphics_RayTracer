@@ -7,6 +7,7 @@
 #define GL_RAYTRACER_RTUTILITIES_H
 
 #include <limits>
+#include <random>
 #include "Vec3.h"
 #include "HittableList.h"
 #include "../geometry/Sphere.h"
@@ -21,9 +22,11 @@ using std::sqrt;
 const double c_infinity = std::numeric_limits<double>::infinity();
 const double c_pi = 3.1415926535897932385;
 
-PPM* renderScene(int width, int height);
+PPM* renderScene(int width, int height, int samplesPerPixel = 100);
 
 Color rayColor(const Ray& r, const hittable& world);
+
+double randomDouble();
 
 double degreesToRadians(double degrees);
 

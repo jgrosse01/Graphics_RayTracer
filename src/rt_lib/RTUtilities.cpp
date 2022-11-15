@@ -5,7 +5,7 @@
 
 #include "RTUtilities.h"
 
-PPM* renderScene(int width, int height) {
+PPM* renderScene(int width, int height, int samplesPerPixel) {
     auto cam = Camera(width/(height*1.0));
 
     HittableList world;
@@ -16,10 +16,15 @@ PPM* renderScene(int width, int height) {
 
     for (int j = height-1; j >= 0; j--) {
         for (int i = 0; i < width; i++) {
-            auto u = double(i) / (width-1);
-            auto v = double(j) / (height-1);
-            Ray r = cam.getRay(u, v);
-            ppm->at(j,i) = rayColor(r, world);
+            Color pixelColor = Color(0,0,0);
+            for (int samples = 0; samples < samplesPerPixel; samples++) {
+                auto u = (double(i) + randomDouble()) / (width-1);
+                auto v = (double(j) + randomDouble()) / (height-1);
+                Ray r = cam.getRay(u, v);
+                pixelColor += rayColor(r, world);
+            }
+
+            ppm->at(j,i) = pixelColor /= samplesPerPixel;
         }
     }
     return ppm;
@@ -33,6 +38,12 @@ Color rayColor(const Ray& r, const hittable& world) {
     Vec3 unit_direction = unit_vector(r.direction());
     auto t = 0.5*(unit_direction.y() + 1.0);
     return (1.0-t) * Color(1.0, 1.0, 1.0) + t * Color(0.4, 0.7, 1.0);
+}
+
+double randomDouble() {
+    static std::uniform_real_distribution<double> s_distribution(0.0, 1.0);
+    static std::mt19937 s_generator;
+    return s_distribution(s_generator);
 }
 
 double degreesToRadians(double degrees) {
