@@ -5,9 +5,21 @@
 #ifndef GL_RAYTRACER_METAL_H
 #define GL_RAYTRACER_METAL_H
 
+#include "MaterialInterface.h"
+#include "../rt_lib/hittable.h"
+#include "../rt_lib/Vec3.h"
 
-class Metal {
+class Metal : public MaterialInterface{
+private:
+    Color materialColor_;
+public:
+    explicit Metal(const Color &color);
 
+    bool scatter(
+            const Ray &rayIn, const hit_record &record, Color &attenuation, Ray &scattered
+            ) const override;
+
+    Color materialColor();
 };
 
 
