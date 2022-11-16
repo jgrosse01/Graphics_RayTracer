@@ -3,9 +3,10 @@
 //
 #include "Sphere.h"
 
-Sphere::Sphere(Point3 center, double radius) {
+Sphere::Sphere(Point3 center, double radius, shared_ptr<MaterialInterface> mat) {
     this->center = center;
     this->radius = radius;
+    this->materialPointer = mat;
 }
 
 bool Sphere::hit(const Ray& r, double t_min, double t_max, hit_record& rec) const {
@@ -30,6 +31,7 @@ bool Sphere::hit(const Ray& r, double t_min, double t_max, hit_record& rec) cons
     rec.p = r.at(rec.t);
     Vec3 outward_normal = (rec.p - center) / radius;
     rec.set_face_normal(r, outward_normal);
+    rec.materialPointer = this->materialPointer;
 
     return true;
 }

@@ -12,8 +12,9 @@ public:
     Point3 center;
     double radius;
     Color color;
+    shared_ptr<MaterialInterface> materialPointer;
 
-    Sphere(Point3 center, double radius);
+    Sphere(Point3 center, double radius, shared_ptr<MaterialInterface> mat);
 
     bool hit(const Ray& r, double t_min, double t_max, hit_record& rec) const override;
 };
