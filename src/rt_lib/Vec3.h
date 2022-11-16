@@ -8,7 +8,6 @@
 
 #include <cmath>
 #include <iostream>
-#include <cstdio>
 
 using std::sqrt;
 
