@@ -14,6 +14,7 @@
 #include "../ppm/PPM.h"
 #include "Camera.h"
 #include "../materials/LambertianDiffuseMaterial.h"
+#include "../materials/Metal.h"
 
 using namespace std;
 using std::shared_ptr;

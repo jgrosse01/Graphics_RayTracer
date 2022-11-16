@@ -11,11 +11,13 @@ PPM* renderScene(int width, int height, int samplesPerPixel, int rayDepth) {
     HittableList world;
 
     // materials
-    auto materialSphere1 = make_shared<LambertianDiffuseMaterial>(Color(0.7, 0.3, 0.3));
+    auto materialSphere1 = make_shared<LambertianDiffuseMaterial>(Color(0.0, 0.2, 0.9));
     auto materialSphere2 = make_shared<LambertianDiffuseMaterial>(Color(0.8,0.8,0.0));
+    auto materialSphere3 = make_shared<Metal>(Color(0.8,0.6,0.2));
     // issue here is constructor needs material
-    world.add(make_shared<Sphere>( Point3(0, 0, -1), 0.5, materialSphere1 ) );
+    world.add(make_shared<Sphere>( Point3(0.6, 0, -1), 0.5, materialSphere1 ) );
     world.add(make_shared<Sphere>( Point3(0, -100.5, -1), 100, materialSphere2 ) );
+    world.add(make_shared<Sphere>( Point3(-0.6, 0, -1), 0.5, materialSphere3));
 
     PPM* ppm = new PPM(width, height);
 
@@ -46,6 +48,7 @@ Color rayColor(const Ray& r, const hittable& world, int depth) {
         Color attenuation;
         if (record.materialPointer->scatter(r, record, attenuation, scattered))
             return attenuation * rayColor(scattered, world, depth-1);
+        return {0,0,0};
     }
 
     // if the ray hits nothing, use a blue-white gradient background
