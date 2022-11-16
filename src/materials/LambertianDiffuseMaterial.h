@@ -15,7 +15,7 @@ private:
 public:
     explicit LambertianDiffuseMaterial(const Color &color);
 
-    virtual bool scatter(
+    bool scatter(
             const Ray &rayIn, const hit_record &record, Color &attenuation, Ray &scattered
             ) const override;
 

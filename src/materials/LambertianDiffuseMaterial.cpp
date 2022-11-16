@@ -8,7 +8,9 @@ LambertianDiffuseMaterial::LambertianDiffuseMaterial(const Color &color) {
     this->materialColor_ = color;
 }
 
-bool LambertianDiffuseMaterial::scatter(const Ray &rayIn, const hit_record &record, Color &attenuation,
+bool LambertianDiffuseMaterial::scatter(const Ray &rayIn,
+                                        const hit_record &record,
+                                        Color &attenuation,
                                         Ray &scattered) const {
     auto scatterDirection = record.normal + randomUnitVector();
     if (scatterDirection.nearZero())
@@ -16,4 +18,8 @@ bool LambertianDiffuseMaterial::scatter(const Ray &rayIn, const hit_record &reco
     scattered = Ray(record.p, scatterDirection);
     attenuation = materialColor_;
     return true;
+}
+
+Color LambertianDiffuseMaterial::materialColor() {
+    return materialColor_;
 }
