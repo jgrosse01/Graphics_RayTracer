@@ -65,9 +65,9 @@ double Vec3::lengthSquared() {
 }
 
 bool Vec3::nearZero() const {
-    return (this->coordinates_[0] < nearZeroThreshold &&
-            this->coordinates_[1] < nearZeroThreshold &&
-            this-> coordinates_[2] < nearZeroThreshold);
+    return (fabs(this->coordinates_[0]) < nearZeroThreshold &&
+            fabs(this->coordinates_[1]) < nearZeroThreshold &&
+            fabs(this->coordinates_[2]) < nearZeroThreshold);
 }
 
 Vec3 Vec3::limitToRange(double minVal, double maxVal) {
