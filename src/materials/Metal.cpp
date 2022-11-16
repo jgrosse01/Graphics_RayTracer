@@ -4,7 +4,8 @@
 
 #include "Metal.h"
 
-Metal::Metal(const Color &color) {
+Metal::Metal(const Color &color, double fuzz) {
+    this->fuzziness = (fuzz < 1) ? fuzz : 1;
     this->materialColor_ = color;
 }
 
@@ -13,7 +14,7 @@ bool Metal::scatter(const Ray &rayIn,
                     Color &attenuation,
                     Ray &scattered) const {
     Vec3 reflected = Vec3::reflect(unitVector(rayIn.direction()), record.normal);
-    scattered = Ray(record.p, reflected);
+    scattered = Ray(record.p, reflected + fuzziness*randomVectorInUnitSphere());
     attenuation = materialColor_;
     return (dot(scattered.direction(), record.normal) > 0);
 }

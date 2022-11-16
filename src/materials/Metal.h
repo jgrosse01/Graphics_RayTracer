@@ -6,14 +6,16 @@
 #define GL_RAYTRACER_METAL_H
 
 #include "MaterialInterface.h"
+#include "../rt_lib/RandomUtilites.h"
 #include "../rt_lib/hittable.h"
 #include "../rt_lib/Vec3.h"
 
 class Metal : public MaterialInterface{
 private:
     Color materialColor_;
+    double fuzziness;
 public:
-    explicit Metal(const Color &color);
+    explicit Metal(const Color &color, double fuzz);
 
     bool scatter(
             const Ray &rayIn, const hit_record &record, Color &attenuation, Ray &scattered
