@@ -4,6 +4,10 @@
 
 #include "Ray.h"
 
+Ray::Ray() {
+
+}
+
 Ray::Ray(const Point3 &origin, const Vec3 &direction) {
     this->origin_ = origin;
     this->direction_ = direction;

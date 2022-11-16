@@ -13,6 +13,7 @@ private:
     Point3 origin_;
     Vec3 direction_;
 public:
+    Ray();
     Ray(const Point3& origin, const Vec3& direction);
 
     Point3 origin() const;
