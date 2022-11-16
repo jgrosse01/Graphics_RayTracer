@@ -5,12 +5,17 @@
 
 #include "RTUtilities.h"
 
-PPM* renderScene(int width, int height, int samplesPerPixel) {
+PPM* renderScene(int width, int height, int samplesPerPixel, int rayDepth) {
     auto cam = Camera(width/(height*1.0));
 
     HittableList world;
-    world.add(make_shared<Sphere>(Point3(0, 0, -1), 0.5) );
-    world.add(make_shared<Sphere>(Point3(0, -100.5, -1), 100));
+
+    // materials
+    auto materialSphere1 = make_shared<LambertianDiffuseMaterial>(Color(0.7, 0.3, 0.3));
+    auto materialSphere2 = make_shared<LambertianDiffuseMaterial>(Color(0.8,0.8,0.0));
+    // issue here is constructor needs material
+    world.add(make_shared<Sphere>( Point3(0, 0, -1), 0.5, materialSphere1 ) );
+    world.add(make_shared<Sphere>( Point3(0, -100.5, -1), 100, materialSphere2 ) );
 
     PPM* ppm = new PPM(width, height);
 
@@ -21,7 +26,7 @@ PPM* renderScene(int width, int height, int samplesPerPixel) {
                 auto u = (double(i) + randomDouble()) / (width-1);
                 auto v = (double(j) + randomDouble()) / (height-1);
                 Ray r = cam.getRay(u, v);
-                pixelColor += rayColor(r, world);
+                pixelColor += rayColor(r, world, rayDepth);
             }
 
             ppm->at(j,i) = pixelColor /= samplesPerPixel;
@@ -30,18 +35,23 @@ PPM* renderScene(int width, int height, int samplesPerPixel) {
     return ppm;
 }
 
-Color rayColor(const Ray& r, const hittable& world) {
+Color rayColor(const Ray& r, const hittable& world, int depth) {
     hit_record record;
-    if (world.hit(r, 0, c_infinity, record)) {
-        return 0.5 * (record.normal + Color(1, 1, 1));
-    }
-    Vec3 unit_direction = unit_vector(r.direction());
-    auto t = 0.5*(unit_direction.y() + 1.0);
-    return (1.0-t) * Color(1.0, 1.0, 1.0) + t * Color(0.4, 0.7, 1.0);
-}
 
-double randomDouble() {
-    return s_distribution(s_generator);
+    if (depth <= 0) {
+        return {0,0,0};
+    }
+    if (world.hit(r, 0.001, c_infinity, record)) {
+        Ray scattered;
+        Color attenuation;
+        if (record.materialPointer->scatter(r, record, attenuation, scattered))
+            return attenuation * rayColor(scattered, world, depth-1);
+    }
+
+    // if the ray hits nothing, use a blue-white gradient background
+    Vec3 unitDirection = unitVector(r.direction());
+    auto t = 0.5*(unitDirection.y() + 1.0);
+    return (1.0-t) * Color(1.0, 1.0, 1.0) + t * Color(0.4, 0.7, 1.0);
 }
 
 double degreesToRadians(double degrees) {
