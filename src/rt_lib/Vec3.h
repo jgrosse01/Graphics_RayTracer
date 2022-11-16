@@ -8,12 +8,14 @@
 
 #include <cmath>
 #include <iostream>
+#include <cstdio>
 
 using std::sqrt;
 
 class Vec3 {
 protected:
     double coordinates_[3]{};
+    static constexpr auto nearZeroThreshold = 1e-8;
 
 public:
     Vec3();
@@ -25,11 +27,13 @@ public:
 
     Vec3 operator-() const;
     double operator[](int i) const;
-    Vec3& operator+=(const Vec3 &v);
+
+Vec3& operator+=(const Vec3 &v);
     Vec3& operator*=(double t);
     Vec3& operator/=(double t);
     double length();
     double lengthSquared();
+    bool nearZero() const;
 
     Vec3 limitToRange(double minVal, double maxVal);
 };
@@ -89,7 +93,7 @@ inline Vec3 cross(Vec3 &u, Vec3 &v) {
             u[0] * v[1] - u[1] * v[0]};
 }
 
-inline Vec3 unit_vector(Vec3 v) {
+inline Vec3 unitVector(Vec3 v) {
     return v / v.length();
 }
 

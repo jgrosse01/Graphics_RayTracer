@@ -64,6 +64,12 @@ double Vec3::lengthSquared() {
     return coordinates_[0] * coordinates_[0] + coordinates_[1] * coordinates_[1] + coordinates_[2] * coordinates_[2];
 }
 
+bool Vec3::nearZero() const {
+    return (this->coordinates_[0] < nearZeroThreshold &&
+            this->coordinates_[1] < nearZeroThreshold &&
+            this-> coordinates_[2] < nearZeroThreshold);
+}
+
 Vec3 Vec3::limitToRange(double minVal, double maxVal) {
     Vec3 vec = Vec3(this->coordinates_[0], this->coordinates_[1], this->coordinates_[2]);
     for (double & coordinate : vec.coordinates_) {
