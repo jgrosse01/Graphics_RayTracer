@@ -35,6 +35,8 @@ Vec3& operator+=(const Vec3 &v);
     bool nearZero() const;
 
     Vec3 limitToRange(double minVal, double maxVal);
+
+    static Vec3 reflect(const Vec3 &v, const Vec3 &normal);
 };
 
 // Type aliases for Vec3 to make code more readable.

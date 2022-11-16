@@ -82,3 +82,7 @@ Vec3 Vec3::limitToRange(double minVal, double maxVal) {
     }
     return vec;
 }
+
+Vec3 Vec3::reflect(const Vec3 &v, const Vec3 &normal) {
+    return v - 2*dot(v,normal)*normal;
+}
