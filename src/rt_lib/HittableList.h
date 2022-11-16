@@ -6,6 +6,7 @@
 #define GL_RAYTRACER_HIT_LIST_H
 
 #include "hittable.h"
+#include "../materials/LambertianDiffuseMaterial.h"
 
 #include <memory>
 #include <vector>
@@ -22,7 +23,7 @@ public:
     explicit HittableList(const shared_ptr<hittable>& object) { add(object); }
 
     void clear() { objects.clear(); }
-    void add(const shared_ptr<hittable>& object) { objects.push_back(object); }
+    void add(const shared_ptr<hittable> &object) { objects.push_back(object); }
 
     bool hit(const Ray& r, double t_min, double t_max, hit_record& rec) const override;
 };
