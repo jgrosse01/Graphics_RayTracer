@@ -5,9 +5,21 @@
 #ifndef GL_RAYTRACER_LAMBERTIANDIFFUSEMATERIAL_H
 #define GL_RAYTRACER_LAMBERTIANDIFFUSEMATERIAL_H
 
+#include "MaterialInterface.h"
+#include "../rt_lib/hittable.h"
+#include "../rt_lib/RandomUtilites.h"
 
-class LambertianDiffuseMaterial {
+class LambertianDiffuseMaterial : public MaterialInterface{
+private:
+    Color materialColor_;
+public:
+    explicit LambertianDiffuseMaterial(const Color &color);
 
+    virtual bool scatter(
+            const Ray &rayIn, const hit_record &record, Color &attenuation, Ray &scattered
+            ) const override;
+
+    Color materialColor();
 };
 
 
