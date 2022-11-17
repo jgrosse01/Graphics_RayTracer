@@ -47,6 +47,9 @@ PPM* PPM::loadPPM(const string& name) {
             ppm->at(j,i) = Color(r/maxColor,g/maxColor,b/maxColor);
         }
     }
+
+    ppmFile.close();
+
     return ppm;
 }
 
