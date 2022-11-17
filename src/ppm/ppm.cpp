@@ -11,16 +11,43 @@ PPM::PPM(int w, int h) {
     pixels_ = new Color[width_ * height_];
 }
 
-int PPM::width() {
+int PPM::width() const {
     return this->width_;
 }
 
-int PPM::height() {
+int PPM::height() const {
     return this->height_;
 }
 
 Color& PPM::at(int r, int c) {
     return pixels_[r * width_ + c];
+}
+
+PPM* PPM::loadPPM(const string& name) {
+    std::ifstream ppmFile("./images/" + name + ".ppm");
+
+    // get format stuff
+    string ppmFormat;
+    int width, height, maxColor;
+    ppmFile >> ppmFormat;
+    ppmFile >> width;
+    ppmFile >> height;
+    ppmFile >> maxColor;
+
+    //std::cout << ppmFormat << " " << width << " " << height << " " << maxColor << std::endl;
+
+    PPM* ppm = new PPM(width, height);
+    for (int j = ppm->height() - 1; j >= 0; j--) {
+        for (int i = 0; i < ppm->width(); i++) {
+            double r, g, b;
+            ppmFile >> r;
+            ppmFile >> g;
+            ppmFile >> b;
+            //std::cout << r/maxColor << " " << g/maxColor << " " << b/maxColor << " " << std::endl;
+            ppm->at(j,i) = Color(r/maxColor,g/maxColor,b/maxColor);
+        }
+    }
+    return ppm;
 }
 
 void PPM::savePPM(const string& name) {

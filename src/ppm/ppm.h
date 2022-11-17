@@ -24,10 +24,12 @@ private:
 public:
     PPM(int w, int h);
 
-    int width();
-    int height();
+    int width() const;
+    int height() const;
 
     Color& at(int r, int c);
+
+    static PPM* loadPPM(const string& filename);
 
     void savePPM(const string& filename);
 
