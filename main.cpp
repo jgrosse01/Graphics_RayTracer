@@ -1,7 +1,7 @@
 #include <GL/freeglut.h>
 #include "src/rt_lib/RTUtilities.h"
 
-int g_width = 600, g_height = 400;
+int g_width = 1000, g_height = 750;
 int g_pixelBorder = 50;
 
 PPM* g_ppm;
