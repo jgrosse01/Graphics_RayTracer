@@ -11,13 +11,15 @@ PPM* renderScene(int width, int height, int samplesPerPixel, int rayDepth) {
     HittableList world;
 
     // materials
-    auto materialSphere1 = make_shared<LambertianDiffuseMaterial>(Color(0.0, 0.2, 0.9));
     auto materialGround = make_shared<LambertianDiffuseMaterial>(Color(0.8,0.8,0.0));
-    auto materialSphere2 = make_shared<Metal>(Color(0.8,0.6,0.2), 0.2);
-    // issue here is constructor needs material
-    world.add(make_shared<Sphere>( Point3(0.6, 0, -1), 0.5, materialSphere1 ) );
-    world.add(make_shared<Sphere>( Point3(0, -100.5, -1), 100, materialGround ) );
-    world.add(make_shared<Sphere>( Point3(-0.6, 0, -1), 0.5, materialSphere2 ) );
+    auto materialSphere1 = make_shared<LambertianDiffuseMaterial>(Color(0.0, 0.2, 0.9));
+    auto materialSphere2 = make_shared<Metal>(Color(0.8,0.6,0.2), 0.5);
+    auto materialSphere3 = make_shared<Metal>( Color(0.8, 0.8, 0.8), 0.01);
+
+    world.add(make_shared<Sphere>( Point3(0, -100.5, -2.5), 100, materialGround ) );
+    world.add(make_shared<Sphere>( Point3(1.5, 0, -2.5), 0.5, materialSphere1 ) );
+    world.add(make_shared<Sphere>( Point3(-1.5, 0, -2.5), 0.5, materialSphere2 ) );
+    world.add(make_shared<Sphere>( Point3(0, 0, -4.0), 0.5, materialSphere3) );
 
     PPM* ppm = new PPM(width, height);
 
