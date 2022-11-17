@@ -1,7 +1,7 @@
 #include <GL/freeglut.h>
 #include "src/rt_lib/RTUtilities.h"
 
-int g_width = 1000, g_height = 750;
+int g_width = 1280, g_height = 720;
 int g_pixelBorder = 50;
 
 PPM* g_ppm;
@@ -10,16 +10,11 @@ PPM* g_ppm;
 //void reshape(int w, int h) {
 //    g_width= w;
 //    g_height = h;
-//    glMatrixMode(GL_PROJECTION);
-//    glLoadIdentity();
 //    glViewport(0, 0, g_width, g_height);
-//    glOrtho(0, g_width+2*g_pixelBorder, 0, g_height+2*g_pixelBorder, -1, 1);
 //    glutPostRedisplay();
 //}
 
 void display() {
-    //reshape(g_width+2*g_pixelBorder, g_height+2*g_pixelBorder);
-
     glClear(GL_COLOR_BUFFER_BIT);
     glBegin(GL_POINTS);
 
@@ -40,23 +35,39 @@ void display() {
 }
 
 void init() {
+    // initial load, right now assumes pre-rendered image
+    g_ppm = PPM::loadPPM("raytrace");
+    g_width = g_ppm->width();
+    g_height = g_ppm->height();
+
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     glClearColor(0.2,0.2,0.2,1.0);
     glOrtho(0, g_width+2*g_pixelBorder, 0, g_height+2*g_pixelBorder, -1, 1);
 }
 
-void keys() {
-
+void keys(unsigned char key, int x, int y) {
+    switch ( key ) {
+        default:
+            break;
+        // when press L key (without shift), load image from file
+        case 'l':
+            g_ppm = PPM::loadPPM("raytrace");
+            g_width = g_ppm->width();
+            g_height = g_ppm->height();
+            break;
+        // when press s key, save ppm image that is in memory
+        case 's':
+            g_ppm->savePPM("raytrace");
+            break;
+        // when press r key, re-render the scene
+        case 'r':
+            g_ppm = renderScene(g_width, g_height);
+            break;
+    }
 }
 
 int main(int argc, char** argv) {
-    g_ppm = PPM::loadPPM("raytrace");
-    g_width = g_ppm->width();
-    g_height = g_ppm->height();
-    //g_ppm = renderScene(g_width, g_height);
-    //g_ppm->savePPM("raytrace");
-
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
     glutInitWindowSize(g_width+2*g_pixelBorder, g_height+2*g_pixelBorder);
@@ -66,7 +77,8 @@ int main(int argc, char** argv) {
     init();
 
     glutDisplayFunc(display);
-    //glutReshapeFunc(reshape);
+//    glutReshapeFunc(reshape);
+    glutKeyboardFunc(keys);
 
     glutMainLoop();
 
