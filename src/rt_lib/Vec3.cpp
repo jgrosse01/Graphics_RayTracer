@@ -27,6 +27,18 @@ double Vec3::z() {
     return this->coordinates_[2];
 }
 
+void Vec3::setX(float x) {
+    this->coordinates_[0] = x;
+}
+
+void Vec3::setY(float y) {
+    this->coordinates_[1] = y;
+}
+
+void Vec3::setZ(float z) {
+    this->coordinates_[2] = z;
+}
+
 Vec3 Vec3::operator-() const {
     return {-coordinates_[0], -coordinates_[1], -coordinates_[2]};
 }

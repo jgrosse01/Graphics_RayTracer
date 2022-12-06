@@ -24,6 +24,10 @@ public:
     double y();
     double z();
 
+    void setX(float x);
+    void setY(float y);
+    void setZ(float z);
+
     Vec3 operator-() const;
     double operator[](int i) const;
 
