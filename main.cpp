@@ -1,7 +1,7 @@
 #include <GL/freeglut.h>
 #include "src/rt_lib/RTUtilities.h"
 
-int g_width = 1280, g_height = 720;
+int g_width = 600, g_height = 400;
 int g_pixelBorder = 50;
 
 PPM* g_ppm;
@@ -36,9 +36,12 @@ void display() {
 
 void init() {
     // initial load, right now assumes pre-rendered image
-    g_ppm = PPM::loadPPM("raytrace");
-    g_width = g_ppm->width();
-    g_height = g_ppm->height();
+//    g_ppm = PPM::loadPPM("raytrace");
+//    g_width = g_ppm->width();
+//    g_height = g_ppm->height();
+
+    g_ppm = renderScene(g_width, g_height);
+    g_ppm->savePPM("raytrace");
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
