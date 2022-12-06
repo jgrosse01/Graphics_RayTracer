@@ -33,6 +33,15 @@ PPM* renderScene(int width, int height, int samplesPerPixel, int rayDepth) {
                 pixelColor += rayColor(r, world, rayDepth);
             }
 
+            auto r = pixelColor.x();
+            auto g = pixelColor.y();
+            auto b = pixelColor.z();
+
+            // replace NaN colors because NaN can cause black or white color acne
+            if (r != r) pixelColor.setX(0.0);
+            if (g != g) pixelColor.setY(0.0);
+            if (b != b) pixelColor.setZ(0.0);
+
             ppm->at(j,i) = pixelColor /= samplesPerPixel;
         }
     }
