@@ -5,12 +5,16 @@
 #ifndef GL_RAYTRACER_DIFFUSELIGHT_H
 #define GL_RAYTRACER_DIFFUSELIGHT_H
 
+#include "MaterialInterface.h"
 
 
-class DiffuseLight {
+class DiffuseLight : public MaterialInterface{
+public:
+    DiffuseLight(Color color) {
+
+    }
 
 };
-
 
 
 #endif //GL_RAYTRACER_DIFFUSELIGHT_H
