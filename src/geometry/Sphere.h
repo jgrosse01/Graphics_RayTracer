@@ -6,8 +6,12 @@
 #define GL_RAYTRACER_SPHERE_H
 
 #include "../rt_lib/hittable.h"
+#include "../rt_lib/RandomUtilites.h"
 
 class Sphere : public hittable {
+private:
+    static void getSphereUV(Vec3 p, double& u, double& v);
+
 public:
     Point3 center;
     double radius;
