@@ -8,7 +8,7 @@
 #include "TextureInterface.h"
 
 
-class SolidColor : public Texture{
+class SolidColor : public TextureInterface{
 private:
     Color colorValue;
 public:
