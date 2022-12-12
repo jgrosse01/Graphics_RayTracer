@@ -2,7 +2,7 @@
 #include "src/rt_lib/RTUtilities.h"
 
 int g_width = 600, g_height = 400;
-int g_pixelBorder = 50;
+int g_pixelBorder = 30;
 
 PPM* g_ppm;
 
