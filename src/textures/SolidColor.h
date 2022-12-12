@@ -5,12 +5,19 @@
 #ifndef GL_RAYTRACER_SOLIDCOLOR_H
 #define GL_RAYTRACER_SOLIDCOLOR_H
 
+#include "Texture.h"
 
 
-class SolidColor {
+class SolidColor : public Texture{
+private:
+    Color colorValue;
+public:
+    SolidColor() {};
+    SolidColor(Color color);
+    SolidColor(double red, double green, double blue);
 
+    virtual Color value(double u, double v, const Point3& p) const override;
 };
-
 
 
 #endif //GL_RAYTRACER_SOLIDCOLOR_H
