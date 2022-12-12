@@ -15,14 +15,8 @@
 #include "Camera.h"
 #include "../materials/LambertianDiffuseMaterial.h"
 #include "../materials/Metal.h"
+#include "../materials/Dielectric.h"
 
-using namespace std;
-using std::shared_ptr;
-using std::make_shared;
-using std::sqrt;
-
-const double c_infinity = std::numeric_limits<double>::infinity();
-const double c_pi = 3.1415926535897932385;
 
 PPM* renderScene(int width, int height, int samplesPerPixel = 50, int rayDepth = 20);
 
