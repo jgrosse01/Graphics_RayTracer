@@ -5,7 +5,7 @@
 #ifndef GL_RAYTRACER_SOLIDCOLOR_H
 #define GL_RAYTRACER_SOLIDCOLOR_H
 
-#include "Texture.h"
+#include "TextureInterface.h"
 
 
 class SolidColor : public Texture{
