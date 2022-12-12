@@ -14,6 +14,10 @@ public:
     virtual bool scatter(
             const Ray &rayIn, const HitRecord &record, Color &attenuation, Ray &scattered
             ) const = 0;
+
+    virtual Color emitted(double u, double v, const Point3&p) const {
+        return Color(0,0,0);
+    }
 };
 
 #endif //GL_RAYTRACER_MATERIALINTERFACE_H
