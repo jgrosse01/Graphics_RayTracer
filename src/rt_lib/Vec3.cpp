@@ -98,3 +98,10 @@ Vec3 Vec3::limitToRange(double minVal, double maxVal) {
 Vec3 Vec3::reflect(const Vec3 &v, const Vec3 &normal) {
     return v - 2*dot(v,normal)*normal;
 }
+
+Vec3 Vec3::refract(const Vec3 &uv, const Vec3 &normal, double etaiEtat) {
+    auto cosTheta = fmin(dot(-uv, normal), 1.0);
+    Vec3 rOutPerpendicular = etaiEtat * (uv + cosTheta*normal);
+    Vec3 rOutParallel = -sqrt(fabs(1.0 - rOutPerpendicular.lengthSquared())) * normal;
+    return rOutPerpendicular + rOutParallel;
+}
