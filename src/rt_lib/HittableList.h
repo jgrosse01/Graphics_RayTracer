@@ -16,14 +16,14 @@ using std::make_shared;
 
 class HittableList : public hittable {
 public:
-    std::vector<shared_ptr<hittable>> objects;
+    std::vector<shared_ptr<hittable>> objects_;
 
     HittableList() = default;
 
     explicit HittableList(const shared_ptr<hittable>& object) { add(object); }
 
-    void clear() { objects.clear(); }
-    void add(const shared_ptr<hittable> &object) { objects.push_back(object); }
+    void clear() { objects_.clear(); }
+    void add(const shared_ptr<hittable> &object) { objects_.push_back(object); }
 
     bool hit(const Ray& r, double t_min, double t_max, hit_record& rec) const override;
 };
