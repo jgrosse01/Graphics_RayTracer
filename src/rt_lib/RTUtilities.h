@@ -20,7 +20,7 @@
 
 PPM* renderScene(int width, int height, int samplesPerPixel = 50, int rayDepth = 20);
 
-Color rayColor(const Ray& r, const hittable& world, int depth);
+Color rayColor(const Ray& r, const Hittable& world, int depth);
 
 double degreesToRadians(double degrees);
 

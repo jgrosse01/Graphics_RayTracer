@@ -5,10 +5,10 @@
 #ifndef GL_RAYTRACER_SPHERE_H
 #define GL_RAYTRACER_SPHERE_H
 
-#include "../rt_lib/hittable.h"
+#include "../rt_lib/Hittable.h"
 #include "../rt_lib/RandomUtilites.h"
 
-class Sphere : public hittable {
+class Sphere : public Hittable {
 private:
     static void getSphereUV(Vec3 p, double& u, double& v);
 
@@ -20,7 +20,7 @@ public:
 
     Sphere(Point3 center, double radius, shared_ptr<MaterialInterface> mat);
 
-    bool hit(const Ray& r, double t_min, double t_max, hit_record& rec) const override;
+    bool hit(const Ray& r, double t_min, double t_max, HitRecord& rec) const override;
 };
 
 

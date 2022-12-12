@@ -4,8 +4,8 @@
 
 #include "HittableList.h"
 
-bool HittableList::hit(const Ray& r, double t_min, double t_max, hit_record& rec) const {
-    hit_record temp_rec;
+bool HittableList::hit(const Ray& r, double t_min, double t_max, HitRecord& rec) const {
+    HitRecord temp_rec;
     bool hit_anything = false;
     auto closest_so_far = t_max;
 

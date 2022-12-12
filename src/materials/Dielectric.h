@@ -6,7 +6,7 @@
 #define GL_RAYTRACER_DIELECTRICS_H
 
 #include "MaterialInterface.h"
-#include "../rt_lib/hittable.h"
+#include "../rt_lib/Hittable.h"
 #include "../rt_lib/RandomUtilites.h"
 
 
@@ -20,7 +20,7 @@ private:
 public:
     explicit Dielectric(double indexOfRefraction, const Color& color);
 
-    bool scatter(const Ray& rayIn, const hit_record& record, Color& attenuation, Ray& Scattered) const override;
+    bool scatter(const Ray& rayIn, const HitRecord& record, Color& attenuation, Ray& Scattered) const override;
 };
 
 

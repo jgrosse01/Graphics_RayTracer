@@ -7,7 +7,7 @@
 
 #include "MaterialInterface.h"
 #include "../rt_lib/RandomUtilites.h"
-#include "../rt_lib/hittable.h"
+#include "../rt_lib/Hittable.h"
 #include "../rt_lib/Vec3.h"
 
 class Metal : public MaterialInterface{
@@ -18,7 +18,7 @@ public:
     explicit Metal(const Color &color, double fuzz);
 
     bool scatter(
-            const Ray &rayIn, const hit_record &record, Color &attenuation, Ray &scattered
+            const Ray &rayIn, const HitRecord &record, Color &attenuation, Ray &scattered
             ) const override;
 
     Color materialColor();

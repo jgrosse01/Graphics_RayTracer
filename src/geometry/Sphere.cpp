@@ -9,7 +9,7 @@ Sphere::Sphere(Point3 center, double radius, shared_ptr<MaterialInterface> mat) 
     this->materialPointer = mat;
 }
 
-bool Sphere::hit(const Ray& r, double t_min, double t_max, hit_record& rec) const {
+bool Sphere::hit(const Ray& r, double t_min, double t_max, HitRecord& rec) const {
     Vec3 oc = r.origin() - center;
     auto a = r.direction().lengthSquared();
     auto half_b = dot(oc, r.direction());

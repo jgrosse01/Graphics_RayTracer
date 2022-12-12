@@ -9,7 +9,7 @@ LambertianDiffuseMaterial::LambertianDiffuseMaterial(const Color &color) {
 }
 
 bool LambertianDiffuseMaterial::scatter(const Ray &rayIn,
-                                        const hit_record &record,
+                                        const HitRecord &record,
                                         Color &attenuation,
                                         Ray &scattered) const {
     auto scatterDirection = record.normal + randomUnitVector();

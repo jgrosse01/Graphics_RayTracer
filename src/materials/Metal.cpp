@@ -10,7 +10,7 @@ Metal::Metal(const Color &color, double fuzz) {
 }
 
 bool Metal::scatter(const Ray &rayIn,
-                    const hit_record &record,
+                    const HitRecord &record,
                     Color &attenuation,
                     Ray &scattered) const {
     Vec3 reflected = Vec3::reflect(unitVector(rayIn.direction()), record.normal);

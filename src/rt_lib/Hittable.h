@@ -11,7 +11,7 @@
 
 using std::shared_ptr;
 
-struct hit_record {
+struct HitRecord {
     shared_ptr<MaterialInterface> materialPointer;
 
     Point3 p;
@@ -27,9 +27,9 @@ struct hit_record {
     }
 };
 
-class hittable {
+class Hittable {
 public:
-    virtual bool hit(const Ray& r, double t_min, double t_max, hit_record& rec) const = 0;
+    virtual bool hit(const Ray& r, double t_min, double t_max, HitRecord& rec) const = 0;
 };
 
 #endif //GL_RAYTRACER_HITTABLE_H

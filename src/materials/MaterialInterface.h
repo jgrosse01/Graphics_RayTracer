@@ -7,12 +7,12 @@
 
 #include "../rt_lib/Ray.h"
 
-struct hit_record;
+struct HitRecord;
 
 class MaterialInterface {
 public:
     virtual bool scatter(
-            const Ray &rayIn, const hit_record &record, Color &attenuation, Ray &scattered
+            const Ray &rayIn, const HitRecord &record, Color &attenuation, Ray &scattered
             ) const = 0;
 };
 
