@@ -107,6 +107,7 @@ PPM* renderScene(int width, int height, int samplesPerPixel, int rayDepth, char 
             pixelColor.setZ(b);
 
             ppm->at(j,i) = pixelColor;
+            cout << "Pixels Left: " << ((j)*(width) + (width-i)) << endl;
         }
     }
     return ppm;
@@ -170,6 +171,8 @@ PPM* renderScene(PPM* existing, int width, int height, int samplesPerPixel, int 
             pixelColor.setZ(b);
 
             existing->at(j,i) = pixelColor;
+
+            cout << "Pixels Left: " << (width*height-((j+1)*height+(i+1))) << endl;
         }
     }
     return existing;

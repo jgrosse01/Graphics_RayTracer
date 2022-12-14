@@ -28,9 +28,9 @@ void renderBalls(HittableList* world);
 
 void renderCornell(HittableList* world);
 
-PPM* renderScene(int width, int height, int samplesPerPixel = 10, int rayDepth = 10, char scene = 'c');
+PPM* renderScene(int width, int height, int samplesPerPixel = 200, int rayDepth = 25, char scene = 'c');
 
-PPM* renderScene(PPM* existing, int width, int height, int samplesPerPixel = 100, int rayDepth = 10, char scene = 'c');
+PPM* renderScene(PPM* existing, int width, int height, int samplesPerPixel = 500, int rayDepth = 25, char scene = 'c');
 
 Color rayColor(const Ray& r, const Color& background, const HittableInterface& world, int depth);
 
