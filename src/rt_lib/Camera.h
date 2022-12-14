@@ -9,6 +9,7 @@
 
 #include "Vec3.h"
 #include "Ray.h"
+#include "RandomUtilites.h"
 
 class Camera {
 private:
@@ -23,7 +24,7 @@ private:
     Vec3 lowerLeftCorner;
 
 public:
-    explicit Camera(double aspectRatio = 16.0/9.0, Vec3 origin = Vec3(0,0,0), double focalLength = 1.0, double viewportHeight = 2.0);
+    explicit Camera(Vec3 origin = {0,0,0}, Vec3 lookAt = {0,0,1}, double aspectRatio = 16.0/9.0, double FOV = 90.0, Vec3 upDirection = {0,1,0});
 
     Ray getRay(double u, double v);
 };

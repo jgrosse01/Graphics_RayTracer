@@ -5,16 +5,20 @@
 
 #include "Camera.h"
 
-Camera::Camera(double aspectRatio, Vec3 origin, double focalLength,  double viewportHeight) {
-    this->origin = origin;
-    this->aspect = aspectRatio;
-    this->focal = focalLength;
-    this->vpHeight = viewportHeight;
+Camera::Camera(Vec3 origin, Vec3 lookAt, double aspectRatio, double FOV, Vec3 upDirection) {
+    auto theta = FOV * (c_pi/180.0);
+    auto height = tan(theta/2);
+    auto viewportHeight = 2.0*height;
+    auto viewportWidth = aspectRatio * viewportHeight;
 
-    this->vpWidth = aspect*vpHeight;
-    this->horizontal = Vec3(vpWidth, 0.0, 0.0);
-    this->vertical = Vec3(0.0, vpHeight, 0.0);
-    this->lowerLeftCorner = origin - horizontal/2 - vertical/2 - Vec3(0,0,focal);
+    auto w = unitVector(origin-lookAt);
+    auto u = unitVector(cross(upDirection, w));
+    auto v = cross(w,u);
+
+    this->origin = origin;
+    this->horizontal = viewportWidth*u;
+    this->vertical = viewportHeight*v;
+    this->lowerLeftCorner = origin - horizontal/2 - vertical/2 - w;
 }
 
 Ray Camera::getRay(double u, double v) {
