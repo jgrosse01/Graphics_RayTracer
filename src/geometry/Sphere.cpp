@@ -30,9 +30,9 @@ bool Sphere::hit(const Ray& r, double t_min, double t_max, HitRecord& rec) const
     rec.t = root;
     rec.p = r.at(rec.t);
     Vec3 outward_normal = (rec.p - center) / radius;
-    rec.set_face_normal(r, outward_normal);
+    rec.setFaceNormal(r, outward_normal);
     getSphereUV(outward_normal, rec.u, rec.v);
-    rec.materialPointer = this->materialPointer;
+    rec.materialPointer_ = this->materialPointer;
 
     return true;
 }
