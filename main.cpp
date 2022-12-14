@@ -1,7 +1,8 @@
 #include <GL/freeglut.h>
 #include "src/rt_lib/RTUtilities.h"
 
-int g_width = 600, g_height = 400;
+// dims for spheres (600x400) dims for cornell (600x600)
+int g_width = 400, g_height = 400;
 int g_pixelBorder = 30;
 
 PPM* g_ppm;
@@ -36,12 +37,12 @@ void display() {
 
 void init() {
     // initial load, right now assumes pre-rendered image
-//    g_ppm = PPM::loadPPM("raytrace");
-//    g_width = g_ppm->width();
-//    g_height = g_ppm->height();
+    g_ppm = PPM::loadPPM("raytrace");
+    g_width = g_ppm->width();
+    g_height = g_ppm->height();
 
-    g_ppm = renderScene(g_width, g_height);
-    g_ppm->savePPM("raytrace");
+//    g_ppm = renderScene(g_width, g_height);
+//    g_ppm->savePPM("raytrace");
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
@@ -67,6 +68,12 @@ void keys(unsigned char key, int x, int y) {
         case 'r':
             g_ppm = renderScene(g_width, g_height);
             break;
+        case 'c':
+            g_ppm = PPM::loadPPM("raytrace");
+            g_width = g_ppm->width();
+            g_height = g_ppm->height();
+            g_ppm = renderScene(g_ppm,g_width, g_height);
+            g_ppm->savePPM("raytrace");
     }
 }
 

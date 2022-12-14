@@ -16,12 +16,22 @@
 #include "../materials/LambertianDiffuseMaterial.h"
 #include "../materials/Metal.h"
 #include "../materials/Dielectric.h"
+#include "../materials/DiffuseLight.h"
+#include "../geometry/XYRect.h"
+#include "../geometry/YZRect.h"
+#include "../geometry/XZRect.h"
+#include "../geometry/Box.h"
+#include "../geometry/Translate.h"
+#include "../geometry/RotateY.h"
 
+void renderBalls(HittableList* world);
 
-PPM* renderScene(int width, int height, int samplesPerPixel = 50, int rayDepth = 20);
+void renderCornell(HittableList* world);
 
-Color rayColor(const Ray& r, const Hittable& world, int depth);
+PPM* renderScene(int width, int height, int samplesPerPixel = 10, int rayDepth = 10, char scene = 'c');
 
-double degreesToRadians(double degrees);
+PPM* renderScene(PPM* existing, int width, int height, int samplesPerPixel = 100, int rayDepth = 10, char scene = 'c');
+
+Color rayColor(const Ray& r, const Color& background, const Hittable& world, int depth);
 
 #endif //GL_RAYTRACER_RTUTILITIES_H
