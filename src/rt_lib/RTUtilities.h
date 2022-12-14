@@ -32,6 +32,6 @@ PPM* renderScene(int width, int height, int samplesPerPixel = 10, int rayDepth =
 
 PPM* renderScene(PPM* existing, int width, int height, int samplesPerPixel = 100, int rayDepth = 10, char scene = 'c');
 
-Color rayColor(const Ray& r, const Color& background, const Hittable& world, int depth);
+Color rayColor(const Ray& r, const Color& background, const HittableInterface& world, int depth);
 
 #endif //GL_RAYTRACER_RTUTILITIES_H

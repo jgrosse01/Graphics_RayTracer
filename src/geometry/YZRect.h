@@ -6,12 +6,12 @@
 #define GL_RAYTRACER_YZRECT_H
 
 #include <memory>
-#include "../rt_lib/Hittable.h"
+#include "../rt_lib/HittableInterface.h"
 #include "../materials/MaterialInterface.h"
 
 using std::shared_ptr;
 
-class YZRect : public Hittable{
+class YZRect : public HittableInterface{
 private:
     shared_ptr<MaterialInterface> materialPointer_;
     double z0, z1, y0, y1, k;

@@ -4,7 +4,7 @@
 
 #include "Translate.h"
 
-Translate::Translate(shared_ptr<Hittable> obj, const Vec3 &displacement) {
+Translate::Translate(shared_ptr<HittableInterface> obj, const Vec3 &displacement) {
     this->obj_ = obj;
     this->offset_ = displacement;
 }

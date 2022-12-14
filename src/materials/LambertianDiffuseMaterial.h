@@ -6,7 +6,7 @@
 #define GL_RAYTRACER_LAMBERTIANDIFFUSEMATERIAL_H
 
 #include "MaterialInterface.h"
-#include "../rt_lib/Hittable.h"
+#include "../rt_lib/HittableInterface.h"
 #include "../rt_lib/RandomUtilites.h"
 
 class LambertianDiffuseMaterial : public MaterialInterface{

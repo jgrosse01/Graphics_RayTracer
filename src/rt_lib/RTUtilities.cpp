@@ -175,7 +175,7 @@ PPM* renderScene(PPM* existing, int width, int height, int samplesPerPixel, int 
     return existing;
 }
 
-Color rayColor(const Ray& r, const Color& background, const Hittable& world, int depth) {
+Color rayColor(const Ray& r, const Color& background, const HittableInterface& world, int depth) {
     HitRecord record;
 
     if (depth <= 0) {

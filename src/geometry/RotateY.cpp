@@ -4,7 +4,7 @@
 
 #include "RotateY.h"
 
-RotateY::RotateY(shared_ptr<Hittable> obj, double angle) {
+RotateY::RotateY(shared_ptr<HittableInterface> obj, double angle) {
     auto radians = angle * (c_pi/180);
     this->obj_ = obj;
     this->sinTheta_ = sin(radians);

@@ -2,8 +2,8 @@
  * Code directly adapted from implementation seen in "Ray Tracing in One Weekend" by Peter Shirley
  */
 
-#ifndef GL_RAYTRACER_HITTABLE_H
-#define GL_RAYTRACER_HITTABLE_H
+#ifndef GL_RAYTRACER_HITTABLEINTERFACE_H
+#define GL_RAYTRACER_HITTABLEINTERFACE_H
 
 #include <memory>
 #include "Ray.h"
@@ -27,9 +27,9 @@ struct HitRecord {
     }
 };
 
-class Hittable {
+class HittableInterface {
 public:
     virtual bool hit(const Ray& r, double t_min, double t_max, HitRecord& rec) const = 0;
 };
 
-#endif //GL_RAYTRACER_HITTABLE_H
+#endif //GL_RAYTRACER_HITTABLEINTERFACE_H

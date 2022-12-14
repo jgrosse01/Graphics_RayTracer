@@ -6,7 +6,7 @@
 #define GL_RAYTRACER_BOX_H
 
 #include <memory>
-#include "../rt_lib/Hittable.h"
+#include "../rt_lib/HittableInterface.h"
 #include "../rt_lib/HittableList.h"
 #include "../materials/MaterialInterface.h"
 #include "../geometry/XYRect.h"
@@ -14,7 +14,7 @@
 #include "../geometry/XZRect.h"
 
 
-class Box : public Hittable {
+class Box : public HittableInterface {
 private:
     Point3 boxMin_;
     Point3 boxMax_;

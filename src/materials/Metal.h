@@ -7,7 +7,7 @@
 
 #include "MaterialInterface.h"
 #include "../rt_lib/RandomUtilites.h"
-#include "../rt_lib/Hittable.h"
+#include "../rt_lib/HittableInterface.h"
 #include "../rt_lib/Vec3.h"
 
 class Metal : public MaterialInterface{

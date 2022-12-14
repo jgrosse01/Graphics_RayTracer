@@ -6,14 +6,14 @@
 #define GL_RAYTRACER_TRANSLATE_H
 
 #include <memory>
-#include "../rt_lib/Hittable.h"
+#include "../rt_lib/HittableInterface.h"
 
-class Translate : public Hittable {
+class Translate : public HittableInterface {
 private:
-    shared_ptr<Hittable> obj_;
+    shared_ptr<HittableInterface> obj_;
     Vec3 offset_;
 public:
-    Translate(shared_ptr<Hittable> obj, const Vec3& displacement);
+    Translate(shared_ptr<HittableInterface> obj, const Vec3& displacement);
 
     virtual bool hit(const Ray& r, double t_min, double t_max, HitRecord& record) const override;
 };

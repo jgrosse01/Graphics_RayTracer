@@ -6,10 +6,10 @@
 #define GL_RAYTRACER_XZRECT_H
 
 #include <memory>
-#include "../rt_lib/Hittable.h"
+#include "../rt_lib/HittableInterface.h"
 #include "../materials/MaterialInterface.h"
 
-class XZRect : public Hittable {
+class XZRect : public HittableInterface {
 private:
     shared_ptr<MaterialInterface> materialPointer_;
     double x0, x1, z0, z1, k;

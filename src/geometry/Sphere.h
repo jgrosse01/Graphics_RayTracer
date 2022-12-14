@@ -5,10 +5,10 @@
 #ifndef GL_RAYTRACER_SPHERE_H
 #define GL_RAYTRACER_SPHERE_H
 
-#include "../rt_lib/Hittable.h"
+#include "../rt_lib/HittableInterface.h"
 #include "../rt_lib/RandomUtilites.h"
 
-class Sphere : public Hittable {
+class Sphere : public HittableInterface {
 private:
     static void getSphereUV(Vec3 p, double& u, double& v);
 
