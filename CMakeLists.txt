@@ -1,15 +1,27 @@
-cmake_minimum_required(VERSION 3.23)
-project(GL_Raytracer)
+# Simple CMake Setup
+cmake_minimum_required(VERSION 3.28)
 
-set(CMAKE_CXX_STANDARD 23)
+project(
+    GrosseTracer
+    VERSION 0.1
+    LANGUAGES CXX
+)
 
-file(GLOB_RECURSE SRC ${CMAKE_SOURCE_DIR}/src/*/*.cpp)
-file(GLOB_RECURSE HEADERS ${CMAKE_SOURCE_DIR}src/*/*.h)
+# creates compilation DB
+set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
 
-find_package(OpenGL REQUIRED)
+# GLFW build disabled
+set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
+set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 
-set(SOURCES ${SRC} ${HEADERS})
 
-add_executable(${PROJECT_NAME} main.cpp ${SOURCES})
+set(CXX_STANDARD 23)
 
-TARGET_LINK_LIBRARIES(${PROJECT_NAME} ${OPENGL_LIBRARIES} -lfreeglut)
+# Add library subdirectories here
+add_subdirectory(lib/glfw-3.3.9)
+
+
+# Source files for this project
+# add_subdirectory(src)
+add_subdirectory(apps)

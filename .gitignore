@@ -31,9 +31,24 @@
 *.out
 *.app
 
+# Any Copyright Libs
+lib/*/docs
+lib/*/examples
+lib/*/tests
+
 # IDE/Build files
 .idea/
 .fleet/
-images/
-cmake-build-debug/
+.cache/jb
+
 build/
+cmake-build-debug/
+CMakeFiles/
+images/
+
+CMakeCache.txt
+cmake_install*
+cmake_uninstall*
+compile_commands.json
+Makefile
+
