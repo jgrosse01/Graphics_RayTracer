@@ -36,3 +36,4 @@
 .fleet/
 images/
 cmake-build-debug/
+build/
