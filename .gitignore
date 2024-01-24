@@ -33,5 +33,6 @@
 
 # IDE/Build files
 .idea/
+.fleet/
 images/
 cmake-build-debug/
